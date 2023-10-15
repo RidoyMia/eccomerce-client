@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import TopHeader from '@/components/header/TopHeader'
+import Providers from '@/components/Provider/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+   <Providers>
+     <html lang="en">
       
       <body className={inter.className}>
         <TopHeader></TopHeader>
@@ -25,5 +27,6 @@ export default function RootLayout({
         {children}
         </body>
     </html>
+   </Providers>
   )
 }

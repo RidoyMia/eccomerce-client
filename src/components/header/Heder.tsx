@@ -1,12 +1,52 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../images/logo.png"
 import { GiEternalLove } from 'react-icons/gi';
 import { AiFillShopping } from 'react-icons/ai';
 import './Header.css'
+import { getuser } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 
 const Heder = () => {
+  const[loading,setLoading] = useState(false)
+  const[user,setUser] = useState(null);
+  const router = useRouter()
+  useEffect(()=>{
+    const getUserInfo = getuser();
+const UserPromise = new Promise((resolve, reject) => {
+  if (getUserInfo) {
+    resolve(getUserInfo);
+  } else {
+    reject("User data not found");
+  }
+});
+
+UserPromise.then((result) => {
+    setUser(result)
+    
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+  },[])
+
+  console.log(user,'userinfo from header')
+  const logout = ()=>{
+    setLoading(true)
+    localStorage.removeItem("userInfo")
+    router.push('/')
+
+    setLoading(false)
+
+  }
+  if(loading){
+    return <h1 className='flex justify-center align-middle py-20 text-5xl text-red-500 font-bold'>Loading....</h1>
+}
+ 
     return (
         <div className=" px-2 lg:container md:container ">
              <div className="navbar bg-base-100  pb-5">
@@ -31,9 +71,14 @@ const Heder = () => {
     <ul className="menu menu-horizontal px-1">
     <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Shop</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
+        {
+          user? <button className="py-1 px-4 bg-blue-400 text-white " onClick={logout}>LogOut</button> : <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
+        }
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">About</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Contact</Link>
+        {
+          user?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role}`}>DashBoard</Link> : ""
+        }
     </ul>
   </div>
   <div className="navbar-end">

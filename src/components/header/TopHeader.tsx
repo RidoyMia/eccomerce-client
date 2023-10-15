@@ -1,8 +1,29 @@
+"use client"
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiTwotoneMail } from 'react-icons/ai';
 import logo from "../../images/logo.png"
+import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 const TopHeader = () => {
+    const[user,setUser] = useState(null)
+  useEffect(()=>{
+    const getUserInfo = getuser();
+const UserPromise = new Promise((resolve, reject) => {
+  if (getUserInfo) {
+    resolve(getUserInfo);
+  } else {
+    reject("User data not found");
+  }
+});
+
+UserPromise.then((result) => {
+    setUser(result)
+    
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+  },[])
     return (
         <div className=' bg-gray-400'>
             <div className=' px-1 lg:px-5 md:px-5 grid grid-cols-2'>
@@ -14,7 +35,9 @@ const TopHeader = () => {
                    </div>
                </div>
               <div className='text-right mt-3'>
-              <button className='py-2 px-2 bg-blue-400 text-left rounded-lg'> <Image src={logo} className='w-10' alt="logo"></Image></button>
+             {
+                user?  <button className='py-2 px-2 bg-blue-400 text-left rounded-lg'>{user?.role} </button> : ""
+             }
               </div>
             </div>
         </div>
