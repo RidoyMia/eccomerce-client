@@ -1,0 +1,9 @@
+.shop-banner-container{
+    background-image: url("../../images/shop-banner.jpg");
+    opacity: 0.70;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+  
+
+}

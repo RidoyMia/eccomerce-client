@@ -8,6 +8,7 @@ import './Header.css'
 import { getuser } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "../Loading/Loading";
 
 
 
@@ -25,7 +26,7 @@ const UserPromise = new Promise((resolve, reject) => {
   }
 });
 
-UserPromise.then((result) => {
+UserPromise.then((result : any) => {
     setUser(result)
     
   })
@@ -34,17 +35,20 @@ UserPromise.then((result) => {
   });
   },[])
 
-  console.log(user,'userinfo from header')
-  const logout = ()=>{
-    setLoading(true)
-    localStorage.removeItem("userInfo")
-    router.push('/')
+  
 
+  // logout implementation
+  const logout = async()=>{
+    setLoading(true)
+    const removeUserInfo = await localStorage.removeItem("userInfo")
+    setUser(null)
+    router.push('/')
+    
     setLoading(false)
 
   }
   if(loading){
-    return <h1 className='flex justify-center align-middle py-20 text-5xl text-red-500 font-bold'>Loading....</h1>
+    return <Loading></Loading>
 }
  
     return (
@@ -57,10 +61,10 @@ UserPromise.then((result) => {
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content  mt-3 z-[1] p-2 shadow bg-base-100 rounded-box  w-64 ">
       <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Shop</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">About</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Contact</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         
        
       </ul>
@@ -70,12 +74,12 @@ UserPromise.then((result) => {
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
     <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Shop</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
         {
           user? <button className="py-1 px-4 bg-blue-400 text-white " onClick={logout}>LogOut</button> : <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
         }
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">About</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Contact</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
+        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         {
           user?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role}`}>DashBoard</Link> : ""
         }

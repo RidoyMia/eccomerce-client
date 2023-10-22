@@ -15,8 +15,8 @@ const Category = () => {
     return <p>Loading...</p>;
   }
 
-  const Category = (name : string) =>{
-        router.push(`/category/${name}`)
+  const Category = (id: number) =>{
+        router.push(`/category/${id}`)
   }
 
 
@@ -27,7 +27,7 @@ const Category = () => {
         <div className='flex py-20 flex-wrap justify-center'>
        
       {data?.result?.result?.map((r:any) => (
-        <button onClick={()=>Category(r?.name)} className='m-2 bg-base-100 rounded-md hover:bg-base-300 border  border-gray-500' key={r.id}>
+        <button onClick={()=>Category(r?.id)} className='m-2 bg-base-100 rounded-md hover:bg-base-300 border  border-gray-500' key={r.id}>
           <button className='  px-2 py-2 shadow-2xl'>
             <div>
            
