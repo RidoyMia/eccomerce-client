@@ -1,3 +1,4 @@
+
 import CategoryTypes from '@/components/CategoryTypes/CategoryTypes';
 import React from 'react';
 import 'styled-jsx/style';

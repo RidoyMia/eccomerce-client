@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { AiTwotoneMail } from 'react-icons/ai';
 import logo from "../../images/logo.png"
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
-import { Iuser } from './Heder';
+import { Iuser } from './Header';
 const TopHeader = () => {
     const[user,setUser] = useState<Iuser | null>(null)
   useEffect(()=>{

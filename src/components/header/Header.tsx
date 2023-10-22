@@ -21,7 +21,7 @@ role:string
 updatedAt:string
 }
 
-const Heder = () => {
+const Header = () => {
   const[loading,setLoading] = useState(false)
   const[user,setUser] = useState<Iuser | null>(null);
   const router = useRouter()
@@ -185,4 +185,4 @@ UserPromise.then((result)  => {
     );
 };
 
-export default Heder;
+export default Header;

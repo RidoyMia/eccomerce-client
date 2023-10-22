@@ -1,10 +1,14 @@
-import Heder from '@/components/header/Heder'
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
+
+
+import Header from '@/components/header/Header'
 import TopHeader from '@/components/header/TopHeader'
-import Providers from '@/components/Provider/Providers'
 import Footer from '@/components/Footer/Footer'
+import Providers from '@/components/Provider/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +25,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       
       <body className={inter.className}>
         <TopHeader></TopHeader>
-       <Heder></Heder>
+      <Header></Header>
         {children}
         <Footer></Footer>
         </body>
