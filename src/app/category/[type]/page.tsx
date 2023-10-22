@@ -1,7 +1,7 @@
 "use client"
 import CategoryTypes from '@/components/CategoryTypes/CategoryTypes';
 import React from 'react';
-import 'styled-jsx/style';
+
 
 const page = ({params}:any) => {
     const{type} = params
