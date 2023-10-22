@@ -7,7 +7,15 @@ import { setAndGetToken } from "@/utility/SetUserLocalHelper/SetUserLocalHelper"
 import Loading from "../Loading/Loading";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+export interface Loginuser {
+    data : {
+        ACCESSTOKEN :string,
+        others : {
+            role :string
+        }
 
+    }
+}
 const Login = () => {
     const[loading,setLoading] = useState(false)
     const router = useRouter()
@@ -21,13 +29,24 @@ const Login = () => {
         const data = {
             email,password
         }
-        const logined = await loginUser(data);
-        if(logined?.data){
-            const setItem = await setAndGetToken(logined?.data?.ACCESSTOKEN,logined?.data?.others) 
-            console.log(setItem,'setting')
-            router.push(`/${logined?.data?.others?.role}/profile`)
+        const response = await loginUser(data);
+
+        if ("data" in response) {
+            const logined: Loginuser = response.data;
+            if (logined.data) {
+                const setItem = await setAndGetToken(logined.data.ACCESSTOKEN, logined.data.others);
+                console.log(setItem, 'setting');
+                router.push(`/${logined.data.others.role}/profile`);
+            } else {
+                // Handle the case where 'data' is missing in the response
+                console.error("Data is missing in the login response.");
+            }
+        } else {
+            // Handle the error case
+            console.error("Error in login response:", response.error);
         }
-    setLoading(false)
+    
+        setLoading(false);
 
     }
     if(isLoading || loading){

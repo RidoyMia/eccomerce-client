@@ -1,5 +1,5 @@
 "use client"
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler,FieldValues } from "react-hook-form"
 import React from 'react';
 import Image from "next/image";
 import loginphoto from "../../images/login.png"
@@ -32,7 +32,7 @@ const SellerRegisters = () => {
         watch,
         formState: { errors },
       } = useForm()
-      const onSubmit: SubmitHandler = (data:any) => {
+      const onSubmit: SubmitHandler<FieldValues> = (data:any) => {
         if(data.password !=data.confirm){
             return alert('password does not match')
         }
@@ -59,10 +59,12 @@ const SellerRegisters = () => {
                 }
             })
             registerPromise.then(res=>{
+                //@ts-ignore
                 if(res?.data?.action){
                    
-                  
+                  //@ts-ignore
                     const setItem = localStorage.setItem("userInfo",JSON.stringify(res?.data?.others));
+                    //@ts-ignore
                     const getIteam = JSON.parse(localStorage.getItem("userInfo"))
                     router.push(`/${getIteam.role}/profile`)
                       

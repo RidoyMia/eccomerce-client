@@ -21,14 +21,14 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.5.6",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-slick": "^0.23.10",
     "autoprefixer": "latest",
     "daisyui": "^3.8.2",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint": "^8.52.0",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"

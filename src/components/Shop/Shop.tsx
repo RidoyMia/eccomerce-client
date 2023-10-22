@@ -80,7 +80,7 @@ const Shop = () => {
                 <div className='col-span-0 lg:col-span-3 md:col-span-3'>
                <div className='grid grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-y-4'>
                {
-                    products?.map((f:any) => <div className="card  w-40 h-full lg:h-full  lg:w-52 md:w-56 bg-base-100 xl:w-80 shadow-xl">
+                    products?.map((f:any) => <div key={f?.id} className="card  w-40 h-full lg:h-full  lg:w-52 md:w-56 bg-base-100 xl:w-80 shadow-xl">
                     <figure><img src={f?.picture} className='w-full  h-48 lg:h-64'  alt="Shoes" /></figure>
                     <div className=" py-5 px-1 lg:px-4 xl:px-4 md:px-4">
                       <h2 className="font-semibold text-md">
@@ -124,7 +124,7 @@ const Shop = () => {
             </div>
             <div className='flex justify-center items-center align-middle py-20'>
                     {
-                      paginationPages?.map(p => <button onClick={()=>setPages(p + 1)} className={` font-bold  rounded-sm px-2 ${
+                      paginationPages?.map(p => <button key={p} onClick={()=>setPages(p + 1)} className={` font-bold  rounded-sm px-2 ${
                         p + 1 === pages
                           ? 'bg-blue-600 text-white' // Active button styles
                           : 'bg-blue-300 text-black' // Inactive button styles

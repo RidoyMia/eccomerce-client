@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { AiTwotoneMail } from 'react-icons/ai';
 import logo from "../../images/logo.png"
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
+import { Iuser } from './Heder';
 const TopHeader = () => {
-    const[user,setUser] = useState(null)
+    const[user,setUser] = useState<Iuser | null>(null)
   useEffect(()=>{
     const getUserInfo = getuser();
 const UserPromise = new Promise((resolve, reject) => {
@@ -17,7 +18,8 @@ const UserPromise = new Promise((resolve, reject) => {
 });
 
 UserPromise.then((result) => {
-    setUser(result)
+  const userResult = result as Iuser;
+    setUser(userResult)
     
   })
   .catch((error) => {

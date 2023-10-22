@@ -10,7 +10,7 @@ const CategoryTypes = ({type}:any) => {
             <h1>{data?.result?.result[0].name}</h1>
             <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 gap-y-2 xl:gap-y-4 xl:gap-x-4 lg:gap-y-8 gap-x-1 md:gap-x-8 md:gap-y-8'>
                 {
-                    data?.result?.result?.map((f:any) => <div className="card  w-40 h-full lg:h-full  lg:w-72 md:w-60 bg-base-100 xl:w-full shadow-xl">
+                    data?.result?.result?.map((f:any) => <div key={f?.id} className="card  w-40 h-full lg:h-full  lg:w-72 md:w-60 bg-base-100 xl:w-full shadow-xl">
                     <figure><img src={f?.picture} className='w-full  h-48 lg:h-64'  alt="Shoes" /></figure>
                     <div className=" py-5 px-1 lg:px-4 xl:px-4 md:px-4">
                       <h2 className="font-semibold text-md">

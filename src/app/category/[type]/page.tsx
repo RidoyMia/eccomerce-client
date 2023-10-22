@@ -6,7 +6,7 @@ const page = ({params}:any) => {
     return (
         <div>
             <h1 className='px-20 py-20'>{type}</h1>
-            <CategoryTypes type={type}></CategoryTypes>
+            <CategoryTypes key={type} type={type}></CategoryTypes>
         </div>
     );
 };

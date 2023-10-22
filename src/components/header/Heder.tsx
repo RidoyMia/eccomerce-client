@@ -10,11 +10,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../Loading/Loading";
 
-
+export interface Iuser {
+  createdAt : string,
+email : string
+id : number
+login : boolean
+name : string
+profile:string
+role:string
+updatedAt:string
+}
 
 const Heder = () => {
   const[loading,setLoading] = useState(false)
-  const[user,setUser] = useState(null);
+  const[user,setUser] = useState<Iuser | null>(null);
   const router = useRouter()
   useEffect(()=>{
     const getUserInfo = getuser();
@@ -26,8 +35,10 @@ const UserPromise = new Promise((resolve, reject) => {
   }
 });
 
-UserPromise.then((result : any) => {
-    setUser(result)
+UserPromise.then((result)  => {
+  const userResult = result as Iuser;
+  setUser(userResult);
+    console.log(result)
     
   })
   .catch((error) => {
@@ -81,7 +92,7 @@ UserPromise.then((result : any) => {
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         {
-          user?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role}`}>DashBoard</Link> : ""
+          user && user.role ?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role!}`}>DashBoard</Link> : ""
         }
     </ul>
   </div>

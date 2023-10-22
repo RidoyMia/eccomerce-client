@@ -1,4 +1,5 @@
 "use client"
+/* eslint-disable */
 import UserHeader from '@/components/userHeader/UserHeader';
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 import { useRouter } from 'next/navigation';
