@@ -1,4 +1,4 @@
-
+"use client"
 import Details from '@/components/Details/Details';
 import React from 'react';
 import { useRouter } from 'next/router';
