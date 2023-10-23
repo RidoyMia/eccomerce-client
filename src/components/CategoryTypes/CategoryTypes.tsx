@@ -1,8 +1,10 @@
 "use client"
 import { useGetAllByCategoryQuery } from '@/redux/ProductApi/ProductApi';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const CategoryTypes = ({type}:any) => {
+  const count = useSelector((state)=>state.cart)
     const {data,isError,isLoading} = useGetAllByCategoryQuery(type)
     console.log(data?.result?.result,'shari')
     return ( 

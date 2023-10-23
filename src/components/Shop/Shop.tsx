@@ -1,8 +1,14 @@
 "use client"
 import { useGetAllproductsQuery } from '@/redux/ProductApi/ProductApi';
+import { addTocart } from '@/redux/addtocartSlice/CartSlice';
+import { useRouter } from 'next/navigation';
+
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Shop = () => {
+  const router = useRouter()
+    const dispatch = useDispatch()
     const[range,setRange] = useState(0);
     const[loading,setLoading] = useState(false)
     const[price,setPrice] = useState('asc')
@@ -108,8 +114,8 @@ const Shop = () => {
                       <div className="flex xl:flex lg:flex md:flex sm:flex justify-between items-center lg:justify-end mt-4">
                         {/* <div className="badge badge-outline">Fashion</div> 
                         <div className="badge badge-outline">Products</div> */}
-                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold'>Add-cart</button>
-                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold lg:ml-2 '>details</button>
+                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold' onClick={()=>dispatch(addTocart(f))}>Add-cart</button>
+                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold lg:ml-2 'onClick={()=>router.push(`/shop/${f?.id}`)}>details</button>
                       </div>
                     </div>
                   </div>)

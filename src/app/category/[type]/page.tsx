@@ -4,6 +4,7 @@ import React from 'react';
 
 //
 const page = ({params}:any) => {
+    
     const{type} = params
     return (
         <div>

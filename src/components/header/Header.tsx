@@ -9,6 +9,7 @@ import { getuser } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../Loading/Loading";
+import { useSelector } from "react-redux";
 
 export interface Iuser {
   createdAt : string,
@@ -22,6 +23,10 @@ updatedAt:string
 }
 
 const Header = () => {
+  
+  //@ts-ignore
+  const card = useSelector((state)=>state.cart);
+  
   const[loading,setLoading] = useState(false)
   const[user,setUser] = useState<Iuser | null>(null);
   const router = useRouter()
@@ -58,6 +63,9 @@ UserPromise.then((result)  => {
     setLoading(false)
 
   }
+  // const GoAddToCart = ()=>{
+  //   con
+  // }
   if(loading){
     return <Loading></Loading>
 }
@@ -100,15 +108,12 @@ UserPromise.then((result)  => {
     <div className="flex justify-end items-center pl-5">
    
   <div className="indicator">
-  <span className="indicator-item badge badge-secondary">4</span>
-  <div className="grid  w-6  place-items-center "> <Link href='/wishlist' className=" text-2x mr-5 text-red-500 px-2 py-2 bg-slate-300 rounded-full"><GiEternalLove></GiEternalLove></Link></div>
+  <span className="indicator-item badge badge-secondary">{card?.products?.length}</span>
+  <div className="grid  w-6  place-items-center " > <Link href='/cart' className=" text-2x mr-5 text-red-500 px-2 py-2 bg-slate-300 rounded-full"><GiEternalLove></GiEternalLove></Link></div>
 </div>
 
 
-<div className="indicator ml-5 lg:ml-10 md:ml-8">
-  <span className="indicator-item badge badge-secondary">4</span>
-  <div className="grid  w-6  place-items-center "> <Link href='/card' className=" text-2x mr-5  text-yellow-500 px-2 py-2 bg-slate-300 rounded-full"><AiFillShopping></AiFillShopping></Link></div>
-</div>
+
     
 
     </div>

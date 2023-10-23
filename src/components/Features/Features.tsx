@@ -1,11 +1,25 @@
 "use client"
 import { useGetFeautesQuery } from '@/redux/ProductApi/ProductApi';
+import { addTocart } from '@/redux/addtocartSlice/CartSlice';
 import Image from 'next/image';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Features = () => {
+  const dispatch = useDispatch();
+  //@ts-ignore
+  const count = useSelector((state) => state.cart);
+ 
     const {data,error,isLoading} = useGetFeautesQuery(undefined);
-    console.log(data,'feautess')
+    
+    const addtocart = (f:any) =>{
+          
+           dispatch(addTocart(f))
+           
+        
+           console.log(count,'count')
+    }
     return (
         <div className=''>
             <div className='pb-20'>
@@ -47,7 +61,7 @@ const Features = () => {
                       <div className="flex xl:flex lg:flex md:flex sm:flex justify-between items-center lg:justify-end mt-4">
                         {/* <div className="badge badge-outline">Fashion</div> 
                         <div className="badge badge-outline">Products</div> */}
-                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold'>Add-cart</button>
+                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold' onClick={()=>addtocart(f)}>Add-cart</button>
                         <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold lg:ml-2 '>details</button>
                       </div>
                     </div>

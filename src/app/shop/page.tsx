@@ -5,7 +5,9 @@ import "./shop.css"
 import Image from 'next/image';
 import Shop from '@/components/Shop/Shop';
 
+
 const page = () => {
+   
     return (
         <div className=' mt-10 py-11'>
             <div className='shop-banner-container'>
