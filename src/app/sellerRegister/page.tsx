@@ -1,3 +1,4 @@
+
 import SellerRegisters from '@/components/SellerRegister/SellerRegister';
 import React from 'react';
 
