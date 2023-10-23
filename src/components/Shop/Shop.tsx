@@ -1,7 +1,8 @@
 "use client"
 import { useGetAllproductsQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +20,7 @@ const Shop = () => {
      const extra = {toi : 'ami'}
      const {data,isLoading,isError} = useGetAllproductsQuery({pages,price});
      
-    console.log(extra.toi,'price')
+    
   
     const mingRange= 20;
     const rangeHandler = (e:any) =>{
@@ -53,7 +54,7 @@ const Shop = () => {
    const handleSelectChange = (e:any) =>{
     setPrice(e.target.value)
    }
-   console.log(paginationPages,'pagination')
+   
    if(isLoading || loading){
          return <div className='flex justify-center items-center  align-middle'>
             <h1>Loading ............</h1>
