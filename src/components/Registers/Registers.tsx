@@ -6,7 +6,7 @@ import loginphoto from "../../images/login.png"
 import Link from "next/link";
 
 import { useCreateAuthMutation } from '@/redux/AuthApi/AuthApi';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 
 interface FormData {
