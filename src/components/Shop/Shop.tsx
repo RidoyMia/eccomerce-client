@@ -1,7 +1,7 @@
 "use client"
 import { useGetAllproductsQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 
 import React, { useEffect, useState } from 'react';
