@@ -1,0 +1,6 @@
+.category-banner-container{
+  background-image: url("../../images/shop-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

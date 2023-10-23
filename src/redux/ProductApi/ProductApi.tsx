@@ -7,10 +7,14 @@ export const productApi = createApi({
         getFeautes : builder.query({
             query : () =>`/features`
         }),
+        getProductById : builder.query({
+            query : (id)=> `/${id}`
+        }),
         getAllproducts : builder.query({
             
             query : ({pages,price})=> `/All?page=${pages}&price=${price}`
         }),
+       
         getAllByCategory : builder.query({
             query : (id) => `/category/${id}`
         })
@@ -18,4 +22,4 @@ export const productApi = createApi({
     })
 })
 
- export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery} = productApi
+ export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery} = productApi

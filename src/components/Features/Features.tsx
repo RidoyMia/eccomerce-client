@@ -2,11 +2,13 @@
 import { useGetFeautesQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Features = () => {
+  const router = useRouter()
   const dispatch = useDispatch();
   //@ts-ignore
   const count = useSelector((state) => state.cart);
@@ -18,7 +20,7 @@ const Features = () => {
            dispatch(addTocart(f))
            
         
-           console.log(count,'count')
+           console.log('bismiallah')
     }
     return (
         <div className=''>
@@ -59,10 +61,9 @@ const Features = () => {
 
                      
                       <div className="flex xl:flex lg:flex md:flex sm:flex justify-between items-center lg:justify-end mt-4">
-                        {/* <div className="badge badge-outline">Fashion</div> 
-                        <div className="badge badge-outline">Products</div> */}
+                      
                         <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold' onClick={()=>addtocart(f)}>Add-cart</button>
-                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold lg:ml-2 '>details</button>
+                        <button className='category text-sm py-1 px-2 rounded-md mt-3 text-white font-semibold lg:ml-2 'onClick={()=> router.push(`/shop/${f?.id}`)}>details</button>
                       </div>
                     </div>
                   </div>)
