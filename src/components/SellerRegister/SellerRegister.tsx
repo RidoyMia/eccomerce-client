@@ -8,7 +8,7 @@ import { useCreateSellerMutation } from '@/redux/AuthApi/AuthApi';
 
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const SellerRegisters = () => {
     const router = useRouter()
