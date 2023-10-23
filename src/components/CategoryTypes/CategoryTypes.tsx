@@ -1,12 +1,13 @@
 "use client"
 import { useGetAllByCategoryQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
-import { useRouter } from 'next/navigation';
+
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from "../../images/shop-banner.jpg"
 import Image from 'next/image';
 import './categoryTypes.css'
+import { useRouter } from 'next/router';
 const CategoryTypes = ({type}:any) => {
   const router = useRouter()
   const dispatch = useDispatch()

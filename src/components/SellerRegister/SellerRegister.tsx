@@ -5,21 +5,13 @@ import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
 import { useCreateSellerMutation } from '@/redux/AuthApi/AuthApi';
-import { useRouter } from 'next/navigation';
+
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 import { resolve } from "path";
 import { rejects } from "assert";
 import { json } from "stream/consumers";
-// email : string 
-//     password :string
-//     name : string
-//     country :string
-//     divission : string
-//     district : string
-//     sub_district : string
-//     union : string
-//     village_name : string
-//     profile : string
+import { useRouter } from "next/router";
+
 const SellerRegisters = () => {
     const router = useRouter()
     const [createSeller,{isError,isLoading,isSuccess}] = useCreateSellerMutation();

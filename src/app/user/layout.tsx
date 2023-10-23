@@ -4,7 +4,8 @@
 import UserHeader from '@/components/userHeader/UserHeader';
 
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+
 import React, { useEffect, useState } from 'react';
 
 const layout = ({children} : {
