@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import logo from "../../images/shop-banner.jpg"
 import Image from 'next/image';
 import './categoryTypes.css'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 const CategoryTypes = ({type}:any) => {
   const router = useRouter()
   const dispatch = useDispatch()

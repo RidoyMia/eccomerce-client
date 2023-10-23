@@ -20,7 +20,7 @@ const Details = ({id}:{id : number}) => {
           setProductQuantity(productQuantity - 1)
         }
     }
-    console.log(data?.result,'details')
+    console.log(data,'details')
      //@ts-ignore
     return (
         <div className='lg:container md:container px-3 py-10'>
@@ -30,7 +30,7 @@ const Details = ({id}:{id : number}) => {
                 </div>
                 <div className=''>
                     <h1 className='text-md font-semibold'>Name : {data?.result?.name}</h1>
-                    <p className='py-3'>About :{data?.result?.descriptions.slice(0,160)}</p>
+                    <p className='py-3'>About :{data?.result?.descriptions?.slice(0,160)}</p>
                     <h1>Category : {data?.result?.category?.name}</h1>
                     <h1 className='py-3'>Size : {data?.result?.size}</h1>
                     <h1>Brand : {data?.result?.brand}</h1>

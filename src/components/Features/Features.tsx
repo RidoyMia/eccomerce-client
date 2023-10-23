@@ -2,7 +2,7 @@
 import { useGetFeautesQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';

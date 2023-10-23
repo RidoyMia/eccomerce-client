@@ -3,7 +3,7 @@ import { useGetCategoryQuery } from '@/redux/categoryApi/CategoryApi';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import banner from "../../images/bannerthree.png"
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 
 const Category = () => {

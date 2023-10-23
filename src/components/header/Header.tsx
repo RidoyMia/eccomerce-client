@@ -10,7 +10,9 @@ import { useEffect, useState } from "react";
 
 import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
+
 
 export interface Iuser {
   createdAt : string,
@@ -33,7 +35,7 @@ const Header = () => {
   const router = useRouter()
   useEffect(()=>{
     const getUserInfo = getuser();
-const UserPromise = new Promise((resolve, reject) => {
+     const UserPromise = new Promise((resolve, reject) => {
   if (getUserInfo) {
     resolve(getUserInfo);
   } else {

@@ -1,11 +1,12 @@
 "use client"
 import Details from '@/components/Details/Details';
 import React from 'react';
-import { useRouter } from 'next/router';
 
-const Page = () => {
-    const router = useRouter();
-    const { id } = router.query;
+
+const Page = ({params}:any) => {
+   
+    const { id } = params;
+    console.log(id,'is')
 
     return (
         <div>
