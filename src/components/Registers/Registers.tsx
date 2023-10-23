@@ -8,9 +8,7 @@ import Link from "next/link";
 import { useCreateAuthMutation } from '@/redux/AuthApi/AuthApi';
 import { useRouter } from 'next/router';
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
-import { resolve } from "path";
-import { rejects } from "assert";
-import { json } from "stream/consumers";
+
 interface FormData {
     username: string;
     password: string;

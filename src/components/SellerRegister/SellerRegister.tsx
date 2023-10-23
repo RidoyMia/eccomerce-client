@@ -7,9 +7,7 @@ import Link from "next/link";
 import { useCreateSellerMutation } from '@/redux/AuthApi/AuthApi';
 
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
-import { resolve } from "path";
-import { rejects } from "assert";
-import { json } from "stream/consumers";
+
 import { useRouter } from "next/router";
 
 const SellerRegisters = () => {
