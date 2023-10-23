@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useGetUserMutation} from "@/redux/AuthApi/AuthApi";
 import { setAndGetToken } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
 import Loading from "../Loading/Loading";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState } from "react";
 export interface Loginuser {
     data : {

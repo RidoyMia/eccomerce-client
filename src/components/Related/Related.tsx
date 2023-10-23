@@ -1,7 +1,8 @@
 "use client"
 import { useGetAllByCategoryQuery } from '@/redux/ProductApi/ProductApi';
 import { addTocart } from '@/redux/addtocartSlice/CartSlice';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+
 
 import React from 'react';
 import { useDispatch } from 'react-redux';

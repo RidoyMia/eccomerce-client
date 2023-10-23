@@ -5,7 +5,7 @@ import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
 import { useCreateAuthMutation } from '@/redux/AuthApi/AuthApi';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
 import { resolve } from "path";
 import { rejects } from "assert";

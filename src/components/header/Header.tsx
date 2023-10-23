@@ -7,9 +7,10 @@ import { AiFillShopping } from 'react-icons/ai';
 import './Header.css'
 import { getuser } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+
 import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export interface Iuser {
   createdAt : string,
