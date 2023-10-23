@@ -10,6 +10,7 @@ import './categoryTypes.css'
 const CategoryTypes = ({type}:any) => {
   const router = useRouter()
   const dispatch = useDispatch()
+  //@ts-ignore
   const count = useSelector((state)=>state.cart)
     const {data,isError,isLoading} = useGetAllByCategoryQuery(type)
     console.log(data?.result?.result,'shari')

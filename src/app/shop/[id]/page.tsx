@@ -1,10 +1,10 @@
 import Details from '@/components/Details/Details';
 import React from 'react';
 //@ts-ignore
-const page = ({params}) => {
+const page = ({params}:number) => {
     return (
         <div>
-           <Details key={params.id} id={params.id}></Details>
+           <Details id={params.id}></Details>
         </div>
     );
 };

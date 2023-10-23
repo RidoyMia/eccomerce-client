@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 //@ts-ignore
-const Related = ({id}:number) => {
+const Related = ({id}:{id:umber}) => {
   const router = useRouter()
     const dispatch = useDispatch()
     const{data,isError,isLoading} = useGetAllByCategoryQuery(id);

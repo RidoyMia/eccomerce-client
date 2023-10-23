@@ -4,24 +4,10 @@ import { useGetProductByIdQuery } from '@/redux/ProductApi/ProductApi';
 import React, { useState } from 'react';
 import Related from '../Related/Related';
 
-    // SellerId
-    // brand
-    // categoriID
-    // createdAt
-    // descriptions
-    // id
-    // name
-    // oldPrice
-    // picture
-    // price
-    // quantity
-    // size
-    // status
-
-    // updatedAt
-
-"2023-10-21T09:13:35.495Z"
-const Details = ({id}:number) => {
+   
+   
+//@ts-ignore
+const Details = ({id}:{id : number}) => {
     const [productQuantity,setProductQuantity] = useState<number>(1)
     const {data,isError,isLoading} = useGetProductByIdQuery(id)
     const addquantityhandler = ()=>{
@@ -71,7 +57,8 @@ const Details = ({id}:number) => {
             <div className='flex justify-center items-center align-middle'>
                <div className='bg-gray-600 h-1 w-12' ></div>
             </div>
-            <Related key={data?.result.id} id={data?.result?.categoriID}></Related>
+            
+            <Related id={data?.result?.categoriID}/>
         </div>
     );
 };
