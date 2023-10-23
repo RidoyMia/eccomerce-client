@@ -36,7 +36,8 @@ const Details = ({id}:{id : number}) => {
                     <h1>Brand : {data?.result?.brand}</h1>
                     <h1 className='py-3'>Available : {data?.result?.quantity}</h1>
                    
-                    <h1>Price : ${parseInt(data?.result?.price) * parseInt(productQuantity)}</h1>
+                    <h1>Price : ${parseInt(data?.result?.price || "0") * parseInt(productQuantity.toString())}</h1>
+
                     <h1 className='py-3'>quantity : {productQuantity}</h1>
                           <div className='flex justify-start'>
                                <button className='py-2   text-3xl my-1 block'onClick={addquantityhandler} ><AiFillPlusSquare></AiFillPlusSquare></button>
