@@ -77,7 +77,16 @@ const Details = ({id}:{id : number}) => {
                                <button className='py-2   text-3xl my-1 mx-5 block' onClick={decrementQuantityhandler}><AiFillMinusCircle></AiFillMinusCircle></button>
                          
                           </div>
-                          <button className='my-10 bg-yellow-500 text-white font-bold px-10 py-2 rounded-md' onClick={() => document?.getElementById('my_modal_1')?.showModal()}>Order now</button>
+                          <button
+  className='my-10 bg-yellow-500 text-white font-bold px-10 py-2 rounded-md'
+  onClick={() => {
+    const modalElement = document.getElementById('my_modal_1') as HTMLDialogElement;
+    modalElement?.showModal();
+  }}
+>
+  Order now
+</button>
+
     
                  
                     <dialog id="my_modal_1" className="modal">
