@@ -16,9 +16,19 @@ const layout = ({children} : {
     const {user,setUser} = useContext(authContext);
    
     const router = useRouter()
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     
-        
+        useEffect(()=>{
+            setLoading(true)
+            if(user){
+                router.push('/user')
+                setLoading(false)
+            }
+            else{
+                router.push('/')
+                setLoading(false)
+            }
+        },[user])
      
     // if(!user){
     //     router.push('/')

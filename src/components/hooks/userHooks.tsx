@@ -1,15 +1,25 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-export const authContext = createContext(null); // Change to authContext
-//@ts-ignore
-const UserHooks = ({ children }) => { // Change to UserHooks
+export const authContext = createContext(null);
+
+const UserHooks = ({ children }:any) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const userInfo = { user, setUser };
-  useEffect(()=>{
-    const userinfowithstringify=localStorage.getItem('userInfo')
-    //@ts-ignore
-    setUser(JSON.parse(userinfowithstringify))
-  },[user])
+   
+      useEffect(() => {
+        console.log(user,'paicenki')
+            if (user == null) { // Only run the effect when user is not null
+                setLoading(true);
+               const userinfowithstringify = localStorage.getItem('userInfo');
+               if (userinfowithstringify) {
+        setUser(JSON.parse(userinfowithstringify));
+        setLoading(false);
+      }
+    }
+  }, []);
+
+ 
 
   return (
     //@ts-ignore
