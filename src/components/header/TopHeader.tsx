@@ -1,31 +1,15 @@
 "use client"
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiTwotoneMail } from 'react-icons/ai';
 import logo from "../../images/logo.png"
-import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
-import { Iuser } from './Header';
-const TopHeader = () => {
-    const[user,setUser] = useState<Iuser | null>(null)
-  useEffect(()=>{
-    const getUserInfo = getuser();
-const UserPromise = new Promise((resolve, reject) => {
-  if (getUserInfo) {
-    resolve(getUserInfo);
-  } else {
-    reject("User data not found");
-  }
-});
 
-UserPromise.then((result) => {
-  const userResult = result as Iuser;
-    setUser(userResult)
-    
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-  },[])
+import { Iuser } from './Header';
+import { authContext } from '../hooks/userHooks';
+const TopHeader = () => {
+  //@ts-ignore
+   const {user} = useContext(authContext)
+ 
     return (
         <div className=' bg-gray-400'>
             <div className=' px-1 lg:px-5 md:px-5 grid grid-cols-2'>

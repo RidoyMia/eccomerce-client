@@ -11,7 +11,7 @@ const Related = ({id}:{id:umber}) => {
   const router = useRouter()
     const dispatch = useDispatch()
     const{data,isError,isLoading} = useGetAllByCategoryQuery(id);
-    console.log(data?.result?.result,id,'resultttt')
+    
     return (
         <div>
             <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 gap-y-2 xl:gap-y-4 xl:gap-x-4 lg:gap-y-8 gap-x-1 md:gap-x-8 md:gap-y-8'>

@@ -8,7 +8,7 @@ const Cart = () => {
     //@ts-ignore
     const {products} = useSelector((state)=> state.cart);
     const dispatch= useDispatch()
-    console.log(products,'conn')
+ 
     
     return (
         <div className='container'>

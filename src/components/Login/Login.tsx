@@ -6,7 +6,11 @@ import { useGetUserMutation} from "@/redux/AuthApi/AuthApi";
 import { setAndGetToken } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
 import Loading from "../Loading/Loading";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { authContext } from "../hooks/userHooks";
+
+
+
 export interface Loginuser {
     data : {
         ACCESSTOKEN :string,
@@ -17,7 +21,11 @@ export interface Loginuser {
     }
 }
 const Login = () => {
+    //@ts-ignore
+   const {user,setUser} = useContext(authContext);
+   
     const[loading,setLoading] = useState(false)
+    
     const router = useRouter()
     const [loginUser,{isError,isLoading,isSuccess}] = useGetUserMutation();
     const loginhadler = async(e : any) =>{
@@ -30,20 +38,30 @@ const Login = () => {
             email,password
         }
         const response = await loginUser(data);
-
+       
         if ("data" in response) {
+            
             const logined: Loginuser = response.data;
-            if (logined.data) {
-                const setItem = await setAndGetToken(logined.data.ACCESSTOKEN, logined.data.others);
-                console.log(setItem, 'setting');
-                router.push(`/${logined.data.others.role}/profile`);
+            console.log('ami',logined)
+            //@ts-ignore
+            if (logined.others) {
+                console.log('tomi')
+                //@ts-ignore
+                setUser(logined.others)
+                  //@ts-ignore
+                localStorage.setItem('userInfo',JSON.stringify(logined.others))
+                //@ts-ignore
+                const setItem = await setAndGetToken(logined?.ACCESSTOKEN);
+                console.log(setItem,'setting')
+                //@ts-ignore
+                router.push(`/${logined.others.role}/profile`);
             } else {
                 // Handle the case where 'data' is missing in the response
-                console.error("Data is missing in the login response.");
+                
             }
         } else {
             // Handle the error case
-            console.error("Error in login response:", response.error);
+           
         }
     
         setLoading(false);

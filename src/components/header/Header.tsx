@@ -5,12 +5,14 @@ import logo from "../../images/logo.png"
 import { GiEternalLove } from 'react-icons/gi';
 import { AiFillShopping } from 'react-icons/ai';
 import './Header.css'
-import { getuser } from "@/utility/SetUserLocalHelper/SetUserLocalHelper";
-import { useEffect, useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
 
 import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { authContext } from "../hooks/userHooks";
+
 
 
 
@@ -31,44 +33,27 @@ const Header = () => {
   const card = useSelector((state)=>state.cart);
   
   const[loading,setLoading] = useState(false)
-  const[user,setUser] = useState<Iuser | null>(null);
+  //@ts-ignore
+  const{user,setUser} = useContext(authContext)
   const router = useRouter()
-  useEffect(()=>{
-    const getUserInfo = getuser();
-     const UserPromise = new Promise((resolve, reject) => {
-  if (getUserInfo) {
-    resolve(getUserInfo);
-  } else {
-    reject("User data not found");
-  }
-});
-
-UserPromise.then((result)  => {
-  const userResult = result as Iuser;
-  setUser(userResult);
-    console.log(result)
-    
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-  },[])
 
   
 
-  // logout implementation
+
+
+
+  
   const logout = async()=>{
     setLoading(true)
-    const removeUserInfo = await localStorage.removeItem("userInfo")
+    localStorage.removeItem('userInfo')
+    const removeToken = await localStorage.removeItem("ACCESSTOKEN")
     setUser(null)
     router.push('/')
     
     setLoading(false)
 
   }
-  // const GoAddToCart = ()=>{
-  //   con
-  // }
+  
   if(loading){
     return <Loading></Loading>
 }

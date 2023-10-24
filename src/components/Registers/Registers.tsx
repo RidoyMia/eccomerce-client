@@ -1,13 +1,14 @@
 "use client"
 import { useForm, SubmitHandler ,FieldValues } from "react-hook-form"
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
 
 import { useCreateAuthMutation } from '@/redux/AuthApi/AuthApi';
 import { useRouter } from 'next/navigation';
-import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
+
+import { authContext } from "../hooks/userHooks";
 
 interface FormData {
     username: string;
@@ -15,10 +16,12 @@ interface FormData {
     confirm: string;
   }
 const Registers = () => {
+    //@ts-ignore
+    const{user,setUser} = useContext(authContext)
     const router = useRouter()
     const [createUser,{isError,isLoading,isSuccess}] = useCreateAuthMutation();
  
-    console.log(isSuccess,'success')
+    
    
     const {
         register,
@@ -43,6 +46,7 @@ const Registers = () => {
           if(result?.data?.url){
             const registerData = {name : data.name,email : data?.email,password : data?.password,profile : result?.data.url};
             const isRegister =  createUser(registerData);
+            
             const registerPromise = new Promise((resolve,rejects)=>{
                 if(isRegister){
                     resolve(isRegister)
@@ -51,23 +55,24 @@ const Registers = () => {
                 }
             })
             registerPromise.then(res=>{
+                console.log(res,'register')
                 // @ts-ignore
                 if(res?.data?.action){
-                   
+                    //@ts-ignore
+                   setUser(res?.data?.others)
                   // @ts-ignore
-                    const setItem = localStorage.setItem("userInfo",JSON.stringify(res?.data?.others));
-                    // @ts-ignore
-                    const getIteam = JSON.parse(localStorage.getItem("userInfo"))
-                    router.push(`/${getIteam.role}/profile`)
+                    
+                    router.push(`/${user.role}/profile`)
                       
                 }
             }).catch(e=>{
-                console.log(e)
+                
             })
           
           }
 })
     }
+    console.log(user,'from register')
         
     return (
         <div className=''>

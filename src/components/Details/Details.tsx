@@ -20,7 +20,7 @@ const Details = ({id}:{id : number}) => {
           setProductQuantity(productQuantity - 1)
         }
     }
-    console.log(data,'details')
+  
      //@ts-ignore
     return (
         <div className='lg:container md:container px-3 py-10'>

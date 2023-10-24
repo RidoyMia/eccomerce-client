@@ -6,7 +6,7 @@ import React from 'react';
 const Page = ({params}:any) => {
    
     const { id } = params;
-    console.log(id,'is')
+   
 
     return (
         <div>

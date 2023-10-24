@@ -1,27 +1,30 @@
 "use client"
 /* eslint-disable */
 import Loading from '@/components/Loading/Loading';
+import { authContext } from '@/components/hooks/userHooks';
 import UserHeader from '@/components/userHeader/UserHeader';
-import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
+
 import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 
 const layout = ({children} : {
     children: React.ReactNode
   }) => {
+    //@ts-ignore
+    const{user,setUser} = useContext(authContext)
     const router = useRouter()
     const [loading,setLoading] = useState(true)
     useEffect(()=>{
         setLoading(true)
-        const getUser = localStorage.getItem('userInfo');
-        if(!getUser){
+        
+        if(!user){
              router.push('/')
         }else{
             setLoading(false)
         }
         
-        console.log(getUser,'userInfo from user layout')
+      
     },[])
     if(loading){
         return <Loading/>

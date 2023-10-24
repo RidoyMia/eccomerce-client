@@ -33,7 +33,7 @@ const cartSlice = createSlice({
             if(existingProduct  ){
                 if(existingProduct.quantity ==existingProduct.buyQuantity){
                 //    const product = {...state.products}
-                console.log('object')
+                
                 //    state.products.push(product)
                 }
                 else{
@@ -43,9 +43,9 @@ const cartSlice = createSlice({
             }
             else{
                 state.products.push({ ...action.payload, buyQuantity: 1 });
-                console.log('nai')
+               
             }
-        console.log(state.products,'finallly')
+        
         },
         decrementToCart: (state, action: PayloadAction<IProduct>) => {
             const productToDecrement = state.products.find(p => p.id === action.payload.id);

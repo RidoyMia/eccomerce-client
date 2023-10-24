@@ -45,7 +45,7 @@ const Shop = () => {
     }, [data,price]);
     let paginationPages = [];
    if(total! > 0){
-    console.log(total,'big')
+    
     for (let i = 0; i < total!; i++) {
          paginationPages.push(i)
    
@@ -60,7 +60,7 @@ const Shop = () => {
             <h1>Loading ............</h1>
          </div>
    }
-   console.log(total,'total',paginationPages)
+   
     return (
         <div className='py-10 lg:py-12 md:py-16 lg:container xl:container md:container px-2 '>
           <div className='flex justify-end py-10 border'>

@@ -1,29 +1,32 @@
 "use client"
 
+import { authContext } from '@/components/hooks/userHooks';
 /* eslint-disable */
 import UserHeader from '@/components/userHeader/UserHeader';
 
-import { getuser } from '@/utility/SetUserLocalHelper/SetUserLocalHelper';
+
 import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 
 const layout = ({children} : {
     children: React.ReactNode
   }) => {
+    //@ts-ignore
+    const {user,setUser} = useContext(authContext);
+   
     const router = useRouter()
-    const [loading,setLoading] = useState(true)
-    useEffect(()=>{
-        setLoading(true)
-        const getUser = localStorage.getItem('userInfo');
-        if(!getUser){
-             router.push('/')
-        }else{
-            setLoading(false)
-        }
+    const [loading,setLoading] = useState(false)
+    
         
-        console.log(getUser,'userInfo from user layout')
-    },[])
+     
+    // if(!user){
+    //     router.push('/')
+    // }
+    // else{
+    //   router.push(`/${user.role}/profile`)
+    // }
+    
     if(loading){
         return <h1 className='flex justify-center align-middle py-20 text-5xl text-red-500 font-bold'>Loading....</h1>
     }

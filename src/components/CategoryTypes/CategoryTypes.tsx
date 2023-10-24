@@ -14,7 +14,7 @@ const CategoryTypes = ({type}:any) => {
   //@ts-ignore
   const count = useSelector((state)=>state.cart)
     const {data,isError,isLoading} = useGetAllByCategoryQuery(type)
-    console.log(data?.result?.result,'shari')
+    
     return ( 
         <div className='container py-10'>
             
