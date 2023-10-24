@@ -8,8 +8,8 @@ const UserHooks = ({ children }:any) => {
   const userInfo = { user, setUser };
    
       useEffect(() => {
-        console.log(user,'paicenki')
-            if (user == null) { // Only run the effect when user is not null
+       
+            if (user == null) { 
                 setLoading(true);
                const userinfowithstringify = localStorage.getItem('userInfo');
                if (userinfowithstringify) {

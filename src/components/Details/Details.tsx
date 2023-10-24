@@ -1,15 +1,27 @@
 "use client"
-import { AiFillPlusSquare,AiFillMinusCircle,AiFillDelete } from 'react-icons/ai';
+import { AiFillPlusSquare,AiFillMinusCircle,AiFillDelete ,AiOutlineSend} from 'react-icons/ai';
 import { useGetProductByIdQuery } from '@/redux/ProductApi/ProductApi';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import Related from '../Related/Related';
+import { authContext } from '../hooks/userHooks';
+import { useRouter } from 'next/navigation';
+import { useGetCommentQuery, usePostCommentMutation } from '@/redux/commentApi/CommentApi';
 
    
    
 //@ts-ignore
 const Details = ({id}:{id : number}) => {
+    const router = useRouter()
+    //@ts-ignore
+    const postComments = useGetCommentQuery(id);
+    console.log(postComments,'comments')
+    
+    //@ts-ignore
+    const{user} = useContext(authContext)
+    console.log(user,'userrid')
     const [productQuantity,setProductQuantity] = useState<number>(1)
     const {data,isError,isLoading} = useGetProductByIdQuery(id)
+    const [postCommentFunction,options] = usePostCommentMutation()
     const addquantityhandler = ()=>{
         if(data?.result.quantity > productQuantity){
           setProductQuantity(productQuantity + 1)
@@ -19,6 +31,27 @@ const Details = ({id}:{id : number}) => {
         if( productQuantity > 1){
           setProductQuantity(productQuantity - 1)
         }
+    }
+    const reviewHandler = (e:any) =>{
+        e.preventDefault()
+        const form = e.target;
+        if(!user){
+            router.push('/login')
+        }else{
+            const commentData = {
+                
+                data : {
+                    userId : user?.id,
+                    message : e.target.comment.value,
+                    productId : id
+                }
+            }
+            postCommentFunction(commentData);
+            console.log(postCommentFunction,'func')
+            const form = e.target.comment.value;
+            console.log(form)
+        }
+       form.reset()
     }
   
      //@ts-ignore
@@ -44,12 +77,52 @@ const Details = ({id}:{id : number}) => {
                                <button className='py-2   text-3xl my-1 mx-5 block' onClick={decrementQuantityhandler}><AiFillMinusCircle></AiFillMinusCircle></button>
                          
                           </div>
+                    <button className='my-10 bg-yellow-500 text-white font-bold px-10 py-2 rounded-md'onClick={()=>document.getElementById('my_modal_1').showModal()}>Order now</button>      
                  
-
+                    <dialog id="my_modal_1" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Hello!</h3>
+    <p className="py-4">Press ESC key or click the button below to close</p>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button className="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
                 </div>
             </div>
             <div className='py-10'>
                 <p>{data?.result?.descriptions}</p>
+            </div>
+            <div className='py-16'>
+                <h1 className='text-xl py-3'>User Reviews...</h1>
+                <div>
+                    {
+                        postComments?.data?.result?.map((c:any) =><div className='bordered my-7 border py-5 px-6'>
+                         <div className='flex justify-start'>
+                            <div>
+                                <img src={c?.user?.profile} className='w-10 h-10 rounded-full'></img>
+                            </div>
+                            <div className='px-5'>
+                                <h1>{c?.user?.name}{`=>`}</h1>
+                                <p className='py-2'>{c?.message}</p>
+                            </div>
+                         </div>
+                        </div>)
+                    }
+                </div>
+                <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2'>
+                    <div>
+                        <form onSubmit={reviewHandler}>
+                           <div className='flex justify-start items-center border'>
+                            <input type='text' name="comment" placeholder='type here..' className='w-full outline-none py-3 px-10'></input>
+                            <button type='submit' className='text-3xl px-10 text-blue-700 hover:text-blue-900  py-2 rounded-md'><AiOutlineSend></AiOutlineSend></button>
+                           </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div className='flex justify-center items-center align-middle'>
                 <h1 className='text-center font-bold py-3  text-red-800 text-xl'>RELATED PRODUCTS</h1>
