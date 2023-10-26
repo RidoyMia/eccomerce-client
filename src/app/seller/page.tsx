@@ -2,6 +2,7 @@
 import Loading from "@/components/Loading/Loading";
 import { authContext } from "@/components/hooks/userHooks";
 import { useGetProductOfSellerQuery } from "@/redux/ProductApi/ProductApi";
+import { useGetReviewOFEachSellerQuery } from "@/redux/commentApi/CommentApi";
 import { useGetAllOrdersQuery, useGetEachSellerOrderQuery } from "@/redux/orderApi/OrderApi";
 import { useRouter } from "next/navigation";
 import { useContext,useEffect,useState } from "react";
@@ -19,11 +20,11 @@ const page = () => {
     const {data:order,isLoading:load} = useGetEachSellerOrderQuery(accesstoken)
 
     //@ts-ignore
-    const card = useSelector((state)=>state.cart);
+    const {data:Reviews,isLoading:reLoading} = useGetReviewOFEachSellerQuery(accesstoken)
     const router = useRouter()
- console.log(order,"of orders")
+ console.log(Reviews,"of orders")
 
-  if(loading || isLoading){
+  if(loading || isLoading || reLoading){
     return <Loading></Loading>
   }
    
@@ -43,7 +44,7 @@ const page = () => {
                 <p className="text-sm md:text-md lg:text-lg">Total-Amount</p>
             </div>
             <div className="text-center  cursor-pointer py-2 md:py-5 lg:py-5 bg-gray-200 shadow-xl border rounded-md text-black " >
-                <h1>9</h1>
+                <h1>{Reviews?.result?.length}</h1>
                 <p className="text-sm md:text-md lg:text-lg">Total-Reviews</p>
             </div>
            </div>

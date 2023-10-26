@@ -17,8 +17,17 @@ endpoints : builder =>({
             body : data
         }),
         invalidatesTags : ["userCommnet"]
+    }),
+    getReviewOFEachSeller : builder.query({
+        query : (accesstoken) => ({
+            url : `/seller`,
+            method : 'GET',
+            headers : {
+                accesstoken
+            }
+        })
     })
 })
 })
 
-export const { useGetCommentQuery,usePostCommentMutation} = commentApi;
+export const { useGetCommentQuery,usePostCommentMutation,useGetReviewOFEachSellerQuery} = commentApi;
