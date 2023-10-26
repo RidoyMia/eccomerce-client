@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import banner from "../../images/bannerthree.png"
 import { useRouter } from 'next/navigation';
+import Loading from '../Loading/Loading';
 
 
 const Category = () => {
@@ -13,7 +14,7 @@ const Category = () => {
 
   if (isLoading) {
     // Loading state
-    return <p>Loading...</p>;
+    return <Loading></Loading>;
   }
 
   const Category = (id: number) =>{

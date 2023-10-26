@@ -1,17 +1,19 @@
 "use client"
 import { useForm, SubmitHandler,FieldValues } from "react-hook-form"
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
 import { useCreateSellerMutation } from '@/redux/AuthApi/AuthApi';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 
 import { useRouter } from "next/navigation";
 import { authContext } from "../hooks/userHooks";
+import Loading from "../Loading/Loading";
 
 const SellerRegisters = () => {
+    const [loading,setLoading] = useState(false)
     const router = useRouter()
     //@ts-ignore
     const {user,setUser} = useContext(authContext)
@@ -26,6 +28,7 @@ const SellerRegisters = () => {
         formState: { errors },
       } = useForm()
       const onSubmit: SubmitHandler<FieldValues> = (data:any) => {
+        setLoading(true)
         if(data.password !=data.confirm){
             return alert('password does not match')
         }
@@ -54,21 +57,29 @@ const SellerRegisters = () => {
             registerPromise.then(res=>{
                 //@ts-ignore
                 if(res?.data?.action){
+                    toast.success('Seller Successfull')
                     //@ts-ignore
                    setUser(res?.data?.others)
                   //@ts-ignore
                     const setItem = localStorage.setItem("userInfo",JSON.stringify(res?.data?.others));
                     //@ts-ignore
                     
-                    router.push(`/${user.role}/profile`)
+                    
                       
                 }
+                setLoading(false)
             }).catch(e=>{
                 
             })
           
           }
 })
+    }
+    if(user){
+        router.push(`/${user.role}`)
+    }
+    if(isLoading || loading){
+        return <Loading></Loading>
     }
         
     return (
@@ -102,11 +113,11 @@ const SellerRegisters = () => {
     </div>
  
    
-    <input type="file" placeholder="image" className="w-full border rounded-lg border-gray-500 px-8 shadow-inner  outline-none rounded-sm my-5 py-10" {...register("image", { required: true })} />
+    <input type="file" placeholder="image" className="w-full border  border-gray-500 px-8 shadow-inner  outline-none rounded-sm my-5 py-10" {...register("image", { required: true })} />
    
     {errors.exampleRequired && <span>This field is required</span>}
     <Link href="/login" className=" underline text-center my-5">Please Login </Link>
-    <input className="w-full category text-white py-2 mt-5 font-semibold rounded-md" type="submit" />
+    <input className="w-full category text-white py-2 mt-5 font-semibold rounded-md cursor-pointer" type="submit" />
   </form>
            
                 </div>

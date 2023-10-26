@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../Loading/Loading';
 
 const Shop = () => {
   const router = useRouter()
@@ -56,9 +57,7 @@ const Shop = () => {
    }
    
    if(isLoading || loading){
-         return <div className='flex justify-center items-center  align-middle'>
-            <h1>Loading ............</h1>
-         </div>
+         return <Loading></Loading>
    }
    
     return (

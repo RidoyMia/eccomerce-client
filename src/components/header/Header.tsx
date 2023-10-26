@@ -5,7 +5,7 @@ import logo from "../../images/logo.png"
 import { GiEternalLove } from 'react-icons/gi';
 import { AiFillShopping } from 'react-icons/ai';
 import './Header.css'
-
+import toast, { Toaster } from 'react-hot-toast';
 import { useContext, useEffect, useState } from "react";
 
 import Loading from "../Loading/Loading";
@@ -37,21 +37,23 @@ const Header = () => {
   const{user,setUser} = useContext(authContext)
   const router = useRouter()
 
-  
-
-
-
-
-  
   const logout = async()=>{
     setLoading(true)
+    toast.success('logout Successfull')
     localStorage.removeItem('userInfo')
     const removeToken = await localStorage.removeItem("ACCESSTOKEN")
     setUser(null)
+    
     router.push('/')
     
     setLoading(false)
 
+  }
+  const searchHandler = (e:any) =>{
+    e.preventDefault();
+    const form = e.target;
+    router.push(`/search/${form.search.value}`)
+    form.reset()
   }
   
   if(loading){
@@ -60,6 +62,7 @@ const Header = () => {
  
     return (
         <div className=" px-2 lg:container md:container ">
+          <Toaster></Toaster>
              <div className="navbar bg-base-100  pb-5">
   <div className="navbar-start">
     <div className="dropdown">
@@ -69,10 +72,15 @@ const Header = () => {
       <ul tabIndex={0} className="menu menu-sm dropdown-content  mt-3 z-[1] p-2 shadow bg-base-100 rounded-box  w-64 ">
       <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
+        
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
-        
+        {
+          user && user.role ?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role!}`}>DashBoard</Link> : ""
+        }
+        {
+          user? <button className="py-1 px-4 bg-blue-400 text-white " onClick={logout}>LogOut</button> : <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
+        }
        
       </ul>
     </div>
@@ -82,13 +90,14 @@ const Header = () => {
     <ul className="menu menu-horizontal px-1">
     <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
-        {
-          user? <button className="py-1 px-4 bg-blue-400 text-white " onClick={logout}>LogOut</button> : <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
-        }
+       
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         {
           user && user.role ?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role!}`}>DashBoard</Link> : ""
+        }
+         {
+          user? <button className=" rounded-md px-4 bg-blue-400 text-white " onClick={logout}>LogOut</button> : <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/login">login</Link>
         }
     </ul>
   </div>
@@ -127,7 +136,7 @@ const Header = () => {
                             </select>
 
                             <div className="flex justify-between items-center ">
-                               <form>
+                               <form onSubmit={searchHandler}>
                                 <div className="flex justify-start">
                                    <div>
                                    <input type="text" className="w-48 lg:w-96 md:w-64 outline-none  py-3 px-5 borde border-gray-500 border-spacing-2" placeholder="search" name="search"></input>

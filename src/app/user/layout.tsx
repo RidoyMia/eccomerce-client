@@ -42,7 +42,7 @@ const layout = ({children} : {
     }
       
     return (
-        <div className=' bg-gray-900 text-white  lg:container md:container px-2'>
+        <div className='  my-10   lg:container md:container px-2'>
             <div className='grid grid-cols-4 lg:grid-cols-6  md:grid-cols-6 py-20'>
             <div className='col-span-0 lg:col-span-1 md:col-span-1'>
               <UserHeader></UserHeader>

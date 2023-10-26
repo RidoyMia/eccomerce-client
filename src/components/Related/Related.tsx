@@ -6,12 +6,15 @@ import { useRouter } from 'next/navigation';
 
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import Loading from '../Loading/Loading';
 //@ts-ignore
 const Related = ({id}:{id:umber}) => {
   const router = useRouter()
     const dispatch = useDispatch()
     const{data,isError,isLoading} = useGetAllByCategoryQuery(id);
-    
+    if(isLoading){
+      return <Loading></Loading>
+    }
     return (
         <div>
             <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 gap-y-2 xl:gap-y-4 xl:gap-x-4 lg:gap-y-8 gap-x-1 md:gap-x-8 md:gap-y-8'>

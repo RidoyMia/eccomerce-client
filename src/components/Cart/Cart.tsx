@@ -1,15 +1,27 @@
 "use client"
 import { AiFillPlusSquare,AiFillMinusCircle,AiFillDelete } from 'react-icons/ai';
 import { IProduct, RemoveIteam, addTocart, decrementToCart } from '@/redux/addtocartSlice/CartSlice';
-import React from 'react';
+import React, { use, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { authContext } from '../hooks/userHooks';
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
+    const router = useRouter()
+    //@ts-ignore
+    const {user} = useContext(authContext)
     //@ts-ignore
     const {products} = useSelector((state)=> state.cart);
     const dispatch= useDispatch()
  
-    
+    const orderDetaisl = (id:any) =>{
+        if(!user){
+            router.push('/login')
+        }
+        else{
+            router.push(`/order/${id}`)
+        }
+    }
     return (
         <div className='container'>
            <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2'>
@@ -30,6 +42,8 @@ const Cart = () => {
                           <button className='py-2   text-3xl my-1 mx-5 block' onClick={()=>dispatch(decrementToCart(p))}><AiFillMinusCircle></AiFillMinusCircle></button>
                           <button className='py-2   text-3xl my-1 block' onClick={()=>dispatch(RemoveIteam(p))}><AiFillDelete></AiFillDelete></button>
                           </div>
+                          <button
+  className='my-10 bg-yellow-500 text-white font-bold px-10 py-2 rounded-md' onClick={()=>orderDetaisl(p?.id)}>Order now</button>
 
                         </div>
                     </div>

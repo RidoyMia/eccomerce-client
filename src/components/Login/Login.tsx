@@ -1,4 +1,5 @@
 "use client"
+import toast, { Toaster } from 'react-hot-toast';
 import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
@@ -53,6 +54,7 @@ const Login = () => {
                 //@ts-ignore
                 const setItem = await setAndGetToken(logined?.ACCESSTOKEN);
                 console.log(setItem,'setting')
+                toast.success('login successfull')
                 //@ts-ignore
                 router.push(`/${logined.others.role}/profile`);
             } else {
@@ -72,6 +74,7 @@ const Login = () => {
     }
     return (
         <div className="px-2 my-10">
+            <Toaster></Toaster>
             <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-cols-6">
                 <div></div>
                 <div className="col-span-0 lg:col-span-4 md:col-span-4  rounded-md  bg-gray-200 shadow-xl">

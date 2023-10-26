@@ -1,14 +1,15 @@
 "use client"
 import { useForm, SubmitHandler ,FieldValues } from "react-hook-form"
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import Image from "next/image";
 import loginphoto from "../../images/login.png"
 import Link from "next/link";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { useCreateAuthMutation } from '@/redux/AuthApi/AuthApi';
 import { useRouter } from 'next/navigation';
 
 import { authContext } from "../hooks/userHooks";
+import Loading from "../Loading/Loading";
 
 interface FormData {
     username: string;
@@ -16,6 +17,7 @@ interface FormData {
     confirm: string;
   }
 const Registers = () => {
+    const [loadign,setLoading]= useState(false)
     //@ts-ignore
     const{user,setUser} = useContext(authContext)
     const router = useRouter()
@@ -31,6 +33,7 @@ const Registers = () => {
       } = useForm()
       // @ts-ignore
       const onSubmit: SubmitHandler<FieldValues> = (data:any) => {
+        setLoading(true)
         const image = data.image[0]
         const formData = new FormData()
         
@@ -58,11 +61,14 @@ const Registers = () => {
                 console.log(res,'register')
                 // @ts-ignore
                 if(res?.data?.action){
+                    toast.success('Registration successfull')
                     //@ts-ignore
                    setUser(res?.data?.others)
+                   //@ts-ignore
+                   localStorage.setItem('userInfo',JSON.stringify(res?.data?.others))
                   // @ts-ignore
                     
-                    router.push(`/${user.role}/profile`)
+                 router.push(`/${user.role}/profile`)
                       
                 }
             }).catch(e=>{
@@ -70,12 +76,19 @@ const Registers = () => {
             })
           
           }
+          setLoading(false)
 })
     }
+    if(user){
+        router.push(`/${user?.role}`)
+    }
     console.log(user,'from register')
-        
+        if(isLoading || loadign){
+            return <Loading></Loading>
+        }
     return (
         <div className=''>
+            <Toaster></Toaster>
             <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-cols-6">
                 <div></div>
                 <div className="col-span-0 lg:col-span-4 md:col-span-4  rounded-md  bg-gray-200 shadow-xl pl-10">
@@ -94,7 +107,7 @@ const Registers = () => {
      
       {errors.exampleRequired && <span>This field is required</span>}
      <div className="flex  justify-between items-center align-middle"> <Link href="/login" className=" underline text-center my-5">Please Login </Link>  <Link href="/sellerRegister" className=" underline text-center my-5">Become Seller </Link></div>
-      <input className="w-full category text-white py-2 mt-5 font-semibold rounded-md" type="submit" />
+      <input className="w-full category text-white py-2 mt-5 font-semibold rounded-md cursor-pointer" type="submit" />
     </form>
                         </div>
                         <div className="">

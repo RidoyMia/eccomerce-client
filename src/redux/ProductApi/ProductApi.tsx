@@ -14,12 +14,23 @@ export const productApi = createApi({
             
             query : ({pages,price})=> `/All?page=${pages}&price=${price}`
         }),
-       
+       getBySearch : builder.query({
+        query : (search)=>`All?searchText=${search}`
+       }),
         getAllByCategory : builder.query({
             query : (id) => `/category/${id}`
+        }),
+        getProductOfSeller :builder.query({
+            query : ({page,accesstoken,search}) => ({
+                url : `/seller`,
+                method : 'GET',
+                headers : {
+                    accesstoken
+                }
+            })
         })
         
     })
 })
 
- export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery} = productApi
+ export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery,useGetBySearchQuery,useGetProductOfSellerQuery} = productApi
