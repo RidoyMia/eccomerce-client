@@ -12,7 +12,7 @@ const page = () => {
     const [deletedFunc,isLoading] = useDeleteOrderMutation()
     const accesstoken = localStorage.getItem("ACCESSTOKEN")
     const {data,isLoading:loading} = useGetAllOrdersQuery(accesstoken);
-    console.log(data?.result,user?.email,"from pending");
+    console.log(data,user?.email,"from pending");
     const payment = (id:any) =>{
       router.push(`/update/${id}`)
     }
