@@ -22,7 +22,7 @@ export const productApi = createApi({
         }),
         getProductOfSeller :builder.query({
             query : ({page,accesstoken,search}) => ({
-                url : `/seller`,
+                url : `/seller?page=${page}`,
                 method : 'GET',
                 headers : {
                     accesstoken
