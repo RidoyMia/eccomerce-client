@@ -4,10 +4,12 @@ import { authContext } from '@/components/hooks/userHooks';
 import { useGetProductOfSellerQuery } from '@/redux/ProductApi/ProductApi';
 import { useGetReviewOFEachSellerQuery } from '@/redux/commentApi/CommentApi';
 import { useGetEachSellerOrderQuery } from '@/redux/orderApi/OrderApi';
+import { useRouter } from 'next/navigation';
 
 import React, { useContext, useEffect, useState } from 'react';
 
 const page = () => {
+    
     const [accesstoken,setAccesstoken] = useState<string>()
     const [orders,setOders] = useState()
     //@ts-ignore
