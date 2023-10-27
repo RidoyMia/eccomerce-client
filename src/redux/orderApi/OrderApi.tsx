@@ -38,11 +38,11 @@ export const orderApi = createApi({
       invalidatesTags : ["order"]
      }),
      getEachSellerOrder : builder.query({
-      query : (accessToken) => ({
+      query : (accesstoken) => ({
         url : `/seller`,
         method : 'GET',
         headers : {
-          accessToken
+          accesstoken
         }
       })
      })
