@@ -20,6 +20,13 @@ export const productApi = createApi({
         getAllByCategory : builder.query({
             query : (id) => `/category/${id}`
         }),
+        updateProduct : builder.mutation({
+            query : ({id,updateData}) =>({
+                url : `/${id}`,
+                method : 'PATCH',
+                body : updateData
+            })
+        }),
         getProductOfSeller :builder.query({
             query : ({page,
                 accesstoken,search}) => ({
@@ -29,9 +36,10 @@ export const productApi = createApi({
                     accesstoken
                 }
             })
-        })
+        }),
+       
         
     })
 })
 
- export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery,useGetBySearchQuery,useGetProductOfSellerQuery} = productApi
+ export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery,useGetBySearchQuery,useGetProductOfSellerQuery,useUpdateProductMutation} = productApi
