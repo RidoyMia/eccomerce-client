@@ -10,6 +10,7 @@ const page = () => {
     const [loading,setLoading] = useState(false)
     const [page,setPage] = useState(1)
     const [totalPages,setTotaPages] = useState(0)
+    
     const token = typeof window !== 'undefined' ? localStorage.getItem('ACCESSTOKEN') : null;
     const [product,setProduct] = useState([])
     const {data,isLoading} = useGetProductOfSellerQuery({token,page});
@@ -79,8 +80,8 @@ const page = () => {
             </th>
             <th>
               <div className='flex justify-between gap-x-2'>
-                <Link className='bg-yellow-700 py-1 px-2 text-white rounded-sm' href={`/seller/update/${p?.id}`}>update</Link>
-                {/* <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>updateHandler(p?.id) }>Update</button> */}
+
+                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>updateHandler(p?.id) }>Update</button>
                 <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' >Delete</button>
               </div>
             </th>
