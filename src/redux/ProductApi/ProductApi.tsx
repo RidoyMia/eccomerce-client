@@ -21,7 +21,8 @@ export const productApi = createApi({
             query : (id) => `/category/${id}`
         }),
         getProductOfSeller :builder.query({
-            query : ({page,accesstoken,search}) => ({
+            query : ({page,
+                token:accesstoken,search}) => ({
                 url : `/seller?page=${page}`,
                 method : 'GET',
                 headers : {

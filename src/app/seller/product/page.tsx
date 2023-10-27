@@ -10,9 +10,9 @@ const page = () => {
     const [loading,setLoading] = useState(false)
     const [page,setPage] = useState(1)
     const [totalPages,setTotaPages] = useState(0)
-    const accesstoken = localStorage.getItem('ACCESSTOKEN');
+    const token = localStorage.getItem('ACCESSTOKEN');
     const [product,setProduct] = useState([])
-    const {data,isLoading} = useGetProductOfSellerQuery({accesstoken,page});
+    const {data,isLoading} = useGetProductOfSellerQuery({token,page});
     console.log(page,'page')
     useEffect(() => {
         setLoading(true)

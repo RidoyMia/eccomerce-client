@@ -10,20 +10,26 @@ import { useSelector } from "react-redux";
 
 
 const page = () => {
+    const [page,setPage] = useState(1)
     const [loading,setLoading] = useState(false)
-   
+   const [token,setToken] = useState<string>()
     //@ts-ignore
     const {user} = useContext(authContext)
+    useEffect(()=>{
+        const accesstoken = localStorage.getItem("ACCESSTOKEN")
+        //@ts-ignore
+        setToken(accesstoken)
+    },[])
     //@ts-ignore
-    const accesstoken = localStorage.getItem("ACCESSTOKEN")
-    const {data,isLoading} = useGetProductOfSellerQuery({accesstoken,page})
+   
+    const {data,isLoading} = useGetProductOfSellerQuery({token,page});
     //@ts-ignore
-    const {data:order,isLoading:load} = useGetEachSellerOrderQuery(accesstoken)
+    const {data:order,isLoading:load} = useGetEachSellerOrderQuery(token)
 
     //@ts-ignore
-    const {data:Reviews,isLoading:reLoading} = useGetReviewOFEachSellerQuery(accesstoken)
+    const {data:Reviews,isLoading:reLoading} = useGetReviewOFEachSellerQuery(token)
     const router = useRouter()
- console.log(Reviews,"of orders")
+ console.log(data,token,Reviews,"of orders product")
 
   if(loading || isLoading || reLoading){
     return <Loading></Loading>
