@@ -14,6 +14,7 @@ const page = () => {
    
     //@ts-ignore
     const {user} = useContext(authContext)
+    //@ts-ignore
     const accesstoken = localStorage.getItem("ACCESSTOKEN")
     const {data,isLoading} = useGetProductOfSellerQuery({accesstoken,page})
     //@ts-ignore
