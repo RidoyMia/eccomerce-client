@@ -2,16 +2,20 @@
 import Loading from '@/components/Loading/Loading';
 import { authContext } from '@/components/hooks/userHooks';
 import { useDeleteOrderMutation, useGetAllOrdersQuery } from '@/redux/orderApi/OrderApi';
+import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react';
 
 const page = () => {
+  const router = useRouter()
     //@ts-ignore
     const {user} = useContext(authContext)
     const [deletedFunc,isLoading] = useDeleteOrderMutation()
     const accesstoken = localStorage.getItem("ACCESSTOKEN")
     const {data,isLoading:loading} = useGetAllOrdersQuery(accesstoken);
     console.log(data?.result,user?.email,"from pending");
-    
+    const payment = (id:any) =>{
+      router.push(`/update/${id}`)
+    }
     const orderDeleteHandler = (id:number)=>{
         //@ts-ignore
         console.log(user?.email,id)
@@ -63,7 +67,7 @@ const page = () => {
             </th>
             <th>
               <div className='flex justify-between gap-x-2'>
-                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm'>Pay</button>
+                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>payment(p?.id)}>Pay</button>
                 <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>orderDeleteHandler(p?.id)}>Delete</button>
               </div>
             </th>
