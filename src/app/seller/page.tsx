@@ -37,7 +37,7 @@ const page = () => {
    
     return (
         <div className="ml-5">
-           <div className="grid grid-cols-2 lg:grid-cols-3 md:col-span-3 gap-x-2 xl:grid-cols-3  gap-y-8">
+           {/* <div className="grid grid-cols-2 lg:grid-cols-3 md:col-span-3 gap-x-2 xl:grid-cols-3  gap-y-8">
             <div className="text-center cursor-pointer  py-2 md:py-5 lg:py-5 bg-gray-200 shadow-xl border rounded-md text-black" >
                 <h1>{order?.result?.orders?.length}</h1>
                 <p className="text-sm md:text-md lg:text-lg">Total-orders</p>
@@ -54,7 +54,7 @@ const page = () => {
                 <h1>{Reviews?.result?.length}</h1>
                 <p className="text-sm md:text-md lg:text-lg">Total-Reviews</p>
             </div>
-           </div>
+           </div> */}
         </div>
     );
 };
