@@ -1,12 +1,13 @@
 "use client"
+import Loading from '@/components/Loading/Loading';
 import { authContext } from '@/components/hooks/userHooks';
-import { useGetProductOfSellerQuery } from '@/redux/ProductApi/ProductApi';
+import { useDeletedProductMutation, useGetProductOfSellerQuery } from '@/redux/ProductApi/ProductApi';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 
 const page = () => {
     const router = useRouter()
-    
+    const [deletedProductFunc,{isLoading:DeletedLoad,isError:detedERROR}] = useDeletedProductMutation()
     //@ts-ignore
     const {user} = useContext(authContext)
     const [page,setPage] = useState<number>(1);
@@ -28,7 +29,13 @@ const page = () => {
             
         }
     }
-    console.log(data?.result,totalPages,'from product')
+    
+    if(isLoading || DeletedLoad){
+      return <Loading></Loading>
+    }
+    if(detedERROR){
+      console.log(detedERROR,'deleted')
+    }
     return (
         <div>
             <div>
@@ -73,7 +80,7 @@ const page = () => {
               <div className='flex justify-between gap-x-2'>
 
                 <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>router.push(`/seller/update/${p?.id}`)}>Update</button>
-                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' >Delete</button>
+                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm'onClick={()=>deletedProductFunc(p?.id)} >Delete</button>
               </div>
             </th>
           </tr> )

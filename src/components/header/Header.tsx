@@ -73,7 +73,7 @@ const Header = () => {
       <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
         
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
+        
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         {
           user && user.role ?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role!}`}>DashBoard</Link> : ""
@@ -91,7 +91,7 @@ const Header = () => {
     <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/">Home</Link>
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/shop">Shop</Link>
        
-        <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/about">About</Link>
+        
         <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href="/contact">Contact</Link>
         {
           user && user.role ?  <Link className="px-7 text-gray-600 hover:bg-green-300 py-2 text-lg font-semibold " href={`/${user?.role!}`}>DashBoard</Link> : ""
@@ -127,13 +127,7 @@ const Header = () => {
 
 
 
-                            <select className="select category hidden lg:block md:block text-white font-semibold  rounded-none select-primary w-full max-w-xs">
-                                <option disabled selected>What is the best TV show?</option>
-                                <option>Game of Thrones</option>
-                                <option>Lost</option>
-                                <option>Breaking Bad</option>
-                                <option>Walking Dead</option>
-                            </select>
+                            
 
                             <div className="flex justify-between items-center ">
                                <form onSubmit={searchHandler}>
@@ -153,28 +147,7 @@ const Header = () => {
                                
                             </div>
                              <div>
-                             <div className="drawer block lg:hidden md:hidden">
-  <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content">
-    {/* Page content here */}
-    <label htmlFor="my-drawer" className=" ml-10"><svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 ml-2 -mt-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg></label>
-  </div> 
-  <div className="drawer-side">
-    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-    <div className="bg-gray-300 w-80 px-5 py-10  h-full overflow-hidden">
-    <div className="text-center  flex justify-center">
-    <Image className="w-32 text-center py-5" src={logo} alt="logo"></Image>
-    </div>
-    <select className="select category  text-white font-semibold  rounded-none select-primary w-full max-w-xs">
-                                <option disabled selected>What is the best TV show?</option>
-                                <option>Game of Thrones</option>
-                                <option>Lost</option>
-                                <option>Breaking Bad</option>
-                                <option>Walking Dead</option>
-                            </select>
-    </div>
-  </div>
-</div>
+                            
                              </div>
                         </div>
                     

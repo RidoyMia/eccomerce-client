@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // https://eccomerce-server-umber.vercel.app/api/v1/product
 export const productApi = createApi({
     reducerPath : 'products',
+    tagTypes : ['product'],
     baseQuery : fetchBaseQuery({baseUrl : 'https://eccomerce-server-umber.vercel.app/api/v1/product'}),
     endpoints : (builder)=>({
         getFeautes : builder.query({
@@ -12,13 +13,15 @@ export const productApi = createApi({
         }),
         getAllproducts : builder.query({
             
-            query : ({pages,price})=> `/All?page=${pages}&price=${price}`
+            query : ({pages,price})=> `/All?page=${pages}&price=${price}`,
+            providesTags : ['product']
         }),
        getBySearch : builder.query({
         query : (search)=>`All?searchText=${search}`
        }),
         getAllByCategory : builder.query({
-            query : (id) => `/category/${id}`
+            query : (id) => `/category/${id}`,
+            providesTags : ['product']
         }),
         updateProduct : builder.mutation({
             query : ({id,updateData}) =>({
@@ -35,11 +38,26 @@ export const productApi = createApi({
                 headers : {
                     accesstoken
                 }
+            }),
+            providesTags : ['product']
+        }),
+        addproduct : builder.mutation({
+            query : (data) => ({
+                url : `/create`,
+                method : 'POST',
+                body : data
             })
         }),
+        deletedProduct : builder.mutation({
+            query : (id) =>({
+                url : `/delete/${id}`,
+                method : 'DELETE'
+            }),
+            invalidatesTags : ['product']
+        })
        
         
     })
 })
 
- export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery,useGetBySearchQuery,useGetProductOfSellerQuery,useUpdateProductMutation} = productApi
+ export const {useGetFeautesQuery,useGetAllproductsQuery,useGetAllByCategoryQuery,useGetProductByIdQuery,useGetBySearchQuery,useGetProductOfSellerQuery,useUpdateProductMutation,useAddproductMutation,useDeletedProductMutation} = productApi
