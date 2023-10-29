@@ -56,7 +56,7 @@ const Login = () => {
                 console.log(setItem,'setting')
                 toast.success('login successfull')
                 //@ts-ignore
-                router.push(`/${logined.others.role}/profile`);
+                router.push(`/${logined.others.role}`);
             } else {
                 // Handle the case where 'data' is missing in the response
                 

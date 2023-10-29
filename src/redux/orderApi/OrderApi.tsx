@@ -45,8 +45,18 @@ export const orderApi = createApi({
           accesstoken
         }
       })
+     }),
+     getOrderByDay : builder.query({
+      query : (accesstoken) =>({
+        url : `/admin`,
+        method : 'GET',
+        headers : {
+          accesstoken
+        }
+      }),
+     
      })
     })
 })
 
-export const {useOrdersMutation,useGetAllOrdersQuery,useDeleteOrderMutation,useGetEachSellerOrderQuery} = orderApi
+export const {useOrdersMutation,useGetAllOrdersQuery,useDeleteOrderMutation,useGetEachSellerOrderQuery,useGetOrderByDayQuery} = orderApi

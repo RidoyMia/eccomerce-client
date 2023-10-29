@@ -40,7 +40,7 @@ const page = ({params}:any) => {
                 sub_distict
             }
             orders(orderInfo)
-            router.push(`/${user.role}/profile`)
+            router.push(`/${user.role}`)
 
         }
         form.reset()

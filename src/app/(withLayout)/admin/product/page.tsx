@@ -1,21 +1,15 @@
 "use client"
 import Loading from '@/components/Loading/Loading';
-import { authContext } from '@/components/hooks/userHooks';
-import { useDeletedProductMutation, useGetProductOfSellerQuery } from '@/redux/ProductApi/ProductApi';
-import { useRouter } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react';
+import { useDeletedProductMutation, useGetAllproductsQuery } from '@/redux/ProductApi/ProductApi';
+import React, { useEffect, useState } from 'react';
 
 const page = () => {
-    const router = useRouter()
-    const [deletedProductFunc,{isLoading:DeletedLoad,isError:detedERROR}] = useDeletedProductMutation()
-    //@ts-ignore
-    const {user} = useContext(authContext)
     const [page,setPage] = useState<number>(1);
     const [totalPages,setTotalPages] = useState(0)
- 
-        const accesstoken = localStorage.getItem('ACCESSTOKEN');
-       
-    const{data,isLoading,isError} = useGetProductOfSellerQuery({accesstoken,page}) ;
+    const[price,setPrice] = useState('asc')
+    const [pages,setPages] = useState(1)
+    const {data,isLoading,isError} = useGetAllproductsQuery({pages,price});
+    const [deletedProductFunc,{isLoading:DeletedLoad,isError:detedERROR}] = useDeletedProductMutation()
     useEffect(()=>{
         if(data?.result?.result.length > 0){
           
@@ -29,16 +23,13 @@ const page = () => {
             
         }
     }
-    
     if(isLoading || DeletedLoad){
-      return <Loading></Loading>
+        return <Loading></Loading>
     }
-    if(detedERROR){
-      console.log(detedERROR,'deleted')
-    }
-    console.log(page,'setpage')
+    console.log(data?.result,page,totalPages,'for product')
     return (
         <div>
+            <div>
             <div>
             <div className='container'>
             <div className="overflow-x-auto">
@@ -80,7 +71,7 @@ const page = () => {
             <th>
               <div className='flex justify-between gap-x-2'>
 
-                <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm' onClick={()=>router.push(`/seller/update/${p?.id}`)}>Update</button>
+              
                 <button className=' bg-yellow-700 py-1 px-2 text-white rounded-sm'onClick={()=>deletedProductFunc(p?.id)} >Delete</button>
               </div>
             </th>
@@ -99,9 +90,10 @@ const page = () => {
 
             <div className='flex justify-center items-center'>
             {
-                pageArray?.map(p => <button className={`py-1 px-2 font-semibold ${p + 1 == page? 'bg-blue-700 text-white' : 'bg-blue-50 text-black'}`} key={p +1} onClick={()=>setPage(p + 1)}>{p + 1}</button>)
+                pageArray?.map(p => <button className={`py-1 px-2 font-semibold ${p + 1 == pages? 'bg-blue-700 text-white' : 'bg-blue-50 text-black'}`} key={p +1} onClick={()=>setPages(p + 1)}>{p + 1}</button>)
             }
             </div>
+        </div>
         </div>
     );
 };
